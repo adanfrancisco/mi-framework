@@ -4,6 +4,6 @@
 
 interface ControllerInterface
 {
-    public function get();
-    public function post();
+    public static function get();
+    public static function post();
 }

@@ -7,10 +7,13 @@ class RandController implements ControllerInterface
 {
     public static function get()
     {
-        return rand(1,99999999);
+        return 'un numero random por GET: '. rand(1,99999999);
     }
     public static function post()
     {
-        return rand(1,100);
+        $array = [];
+        $array['status'] = 200;
+        $array['message'] = 'un numero random por POST: '. rand(1,100);
+        return json_encode($array);
     }
 }
