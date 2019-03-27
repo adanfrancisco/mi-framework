@@ -8,7 +8,9 @@ class MiFramework
 
     public function get(string $rute) 
     {
+        
         return $this->rutes['GET'][$rute]::get();
+
     }
     public function post(string $rute) 
     {

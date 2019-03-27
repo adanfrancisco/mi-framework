@@ -8,7 +8,10 @@ class RandController implements ControllerInterface
     
     public static function get()
     {
-        return 'un numero random por GET: '. rand(1,99999999);
+        //var_dump($_GET);
+        $min = isset($_GET['min']) ? $_GET['min'] : 1;
+        $max = isset($_GET['max']) ? $_GET['max'] : 10;
+        return 'un numero random por GET entre '.$min.' - '.$max.': '. rand($min, $max);
     }
     public static function post()
     {
