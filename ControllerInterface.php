@@ -4,6 +4,6 @@
 
 interface ControllerInterface
 {
-    public static function get();
-    public static function post();
+    public static function get($request,$argv);
+    public static function post($request,$argv);
 }

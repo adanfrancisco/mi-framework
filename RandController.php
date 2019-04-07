@@ -6,14 +6,15 @@
 class RandController implements ControllerInterface
 {
     
-    public static function get()
+    public static function get($request,$argv)
     {
         //var_dump($_GET);
-        $min = isset($_GET['min']) ? $_GET['min'] : 1;
-        $max = isset($_GET['max']) ? $_GET['max'] : 10;
+        //var_dump( $request);
+        $min = isset($argv['min']) ? $argv['min'] : 1;
+        $max = isset($argv['max']) ? $argv['max'] : 10;
         return 'un numero random por GET entre '.$min.' - '.$max.': '. rand($min, $max);
     }
-    public static function post()
+    public static function post($request,$argv)
     {
         $min = isset($_POST['min']) ? $_POST['min'] : 1;
         $max = isset($_POST['max']) ? $_POST['max'] : 10;
@@ -23,3 +24,9 @@ class RandController implements ControllerInterface
         return json_encode($array);
     }
 }
+
+/**
+ * mostrar/show 
+ * html o json
+ * 
+ */

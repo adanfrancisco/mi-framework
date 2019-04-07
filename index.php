@@ -2,7 +2,9 @@
 
 require_once 'ControllerInterface.php';
 require_once 'RandController.php';
+require_once 'NameController.php';
 require_once 'MiFramework.php';
+require_once 'Routes.php';
 
 
 
@@ -10,34 +12,23 @@ $miFramework = new MiFramework;
 //var_dump($miFramework);
 //RUTES
 
-$miFramework->setRute('GET','/', RandController::class);
-// POST espera min y max. si no están es 1 y 10 por defecto
-$miFramework->setRute('POST','/', RandController::class);
 
+$miFramework->setRute('GET','rand/', RandController::class);
+$miFramework->setRute('GET','rand/{min}', RandController::class);
+//$miFramework->setRute('GET','rand/{min}', RandController::class);
+$miFramework->setRute('GET','rand/{min}/{max}', RandController::class);
+
+// POST espera min y max. si no están es 1 y 10 por defecto
+
+/*
+$miFramework->setRute('POST','rand/', RandController::class);
+
+$miFramework->setRute('GET','name/', NameController::class);
+
+$miFramework->setRute('POST','name/', NameController::class);*/
 // Agregar mas controllers
 
 
-//tomo el método utilizado para pegarle al framework
-$method = $_SERVER['REQUEST_METHOD'];
-//var_dump($_POST);
 
-// Según el metodo utilizado busco qeu devolver
-// Según que metodo llamo a las funciones setadas
-
-switch ($method) {
-    case 'GET':
-        echo $miFramework->get('/');
-        break;
-    case 'POST':
-        echo $miFramework->post('/');
-        break;
-    
-    default:
-        # code...
-        break;
-}
-
-
-
-
+echo $miFramework->run();
 
