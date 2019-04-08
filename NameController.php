@@ -8,18 +8,11 @@ class NameController implements ControllerInterface
 
     public static function get($request,$argv)
     {
-        if( isset( $_GET['name']))
-        {
-            return 'tu nombre es: '. $_GET['name'] . ' por GET';
-        }
-
+        return isset($argv['name']) ? 'tu nombre es: '.$argv['name']. ' por GET' : 'you need "name" parameter'; 
     }
     public static function post($request,$argv)
     {
-        if( isset( $_POST['name']) && isset( $_POST['surname'])   )
-        {
-            return 'tu nombre es: '. $_POST['surname'] .', '. $_POST['name'] . ' por POST';
-        }
+        return isset($argv['name']) && isset($argv['surname']) ? 'tu nombre es: '. $argv['surname'] .', '. $argv['name'] . ' por POST' : 'you need "name" and "surname" parameter';         
     }
     
 }

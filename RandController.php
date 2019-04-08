@@ -2,7 +2,6 @@
 
 //namespace Mixplay;
 
-
 class RandController implements ControllerInterface
 {
     
@@ -14,10 +13,11 @@ class RandController implements ControllerInterface
         $max = isset($argv['max']) ? $argv['max'] : 10;
         return 'un numero random por GET entre '.$min.' - '.$max.': '. rand($min, $max);
     }
+
     public static function post($request,$argv)
     {
-        $min = isset($_POST['min']) ? $_POST['min'] : 1;
-        $max = isset($_POST['max']) ? $_POST['max'] : 10;
+        $min = isset($argv['min']) ? $argv['min'] : 1;
+        $max = isset($argv['max']) ? $argv['max'] : 10;
         $array = [];
         $array['status'] = 200;
         $array['message'] = 'un numero random por POST entre '.$min.' - '.$max.': '.  rand( $min, $max);
@@ -25,8 +25,4 @@ class RandController implements ControllerInterface
     }
 }
 
-/**
- * mostrar/show 
- * html o json
- * 
- */
+

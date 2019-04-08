@@ -12,17 +12,15 @@ class Routes
         $realRute = $aux[0]; // trae la ruta sin parametros
         $auxParam = explode( "/", substr( $allRute, strlen($realRute) ) ); 
         $indice = $this->countArguments($auxParam);
-        //echo $indice;
-        if( empty($this->rutes[$realRute][$indice]) ){
-            $this->rutes[$realRute][$indice]['controller'] = $controller;
-
+        if( empty($this->rutes[$realRute][strtolower($method)][$indice]) ){
+            $this->rutes[$realRute][strtolower($method)][$indice]['controller'] = $controller;
             $this->methodsSets[$realRute][$indice][strtolower($method)]= true;
             if(is_array($auxParam))
             {
                 foreach ($auxParam as $key => $value) { 
                     if(!empty($value)){
                         $value = trim($value, "{}");
-                        $this->rutes[$realRute][$indice][$key+1] = $value;
+                        $this->rutes[$realRute][strtolower($method)][$indice][$key+1] = $value;
                     }
                 }
             }
@@ -30,8 +28,6 @@ class Routes
         }else{
             echo 'you are overwriting a method.';
         }
-        
-        
     }
     public function printRutes()
     {
@@ -40,13 +36,9 @@ class Routes
     }
     public function getRute(string $method, string $rute, int $countArguments )
     {
-        //var_dump($countArguments);
-
         if($this->posible($rute.'/', $method, $countArguments)  )
         {
-            $respuesta = $this->rutes[$rute.'/'][$countArguments];
-            //var_dump($this->rutes[$rute.'/']);
-            //die;
+            $respuesta = $this->rutes[$rute.'/'][strtolower($method)][$countArguments];
             if ( (count($respuesta )-1) == $countArguments) {
                 return $respuesta;
             }else {
@@ -58,17 +50,12 @@ class Routes
     }
     public function posible(string $rute, string $method, int $countArguments) 
     {
-        //var_dump( isset($this->methodsSets[$rute][$countArguments][$method]));
-        
-        //var_dump($countArguments);
-
         return isset( $this->methodsSets[$rute][$countArguments][$method]);
     }
     public function countArguments( $argv):int 
     {
         $count=0;
         foreach ($argv as $value) {
-            
             if(!empty($value)){
                 $count++;
             }
